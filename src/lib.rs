@@ -20,6 +20,32 @@
 //! If you need a lot of random numbers quickly for something non-production critical like unit tests, this may be
 //! a good candidate. Otherwise, if you are planning to use this at runtime, or with types that are non-numeric
 //! or otherwise cannot be created from arbitrary bytes, I would recommend you to choose another, safer crate.
+//!
+//! ## Usage
+//!
+//! If you are certain the above warnings do not apply to the type you are generating, you can use this library like so:
+//!
+//! ### Without Seed
+//!
+//! ```rust
+//! use block_pseudorand::block_rand;
+//!
+//! let random_data: Vec<u64> = block_rand(128);
+//!
+//! assert_eq!(random_data.len(), 128);
+//! ```
+//!
+//! ### With Seed
+//!
+//! ```rust
+//! use block_pseudorand::block_rand_with_seed;
+//!
+//! // Populate this seed as you wish
+//! let seed = [0u8; 32];
+//! let random_data: Vec<u64> = block_rand_with_seed(128, &seed);
+//!
+//! assert_eq!(random_data.len(), 128);
+//! ```
 
 use std::mem::size_of;
 use chiapos_chacha8::ChaCha8;
