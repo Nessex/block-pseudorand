@@ -1,0 +1,11 @@
+[package]
+name = "block-pseudorand"
+version = "0.1.0"
+edition = "2018"
+license = "Apache-2.0 OR MIT"
+
+[dependencies]
+chiapos-chacha8 = "0.1.0"
+transvec = { version = "0.3.6", features = ["std"], default-features = false }
+bytemuck = "1.7.2"
+nanorand = "0.6.1"
