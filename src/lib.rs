@@ -82,11 +82,14 @@ pub fn block_rand_with_seed<T: Copy>(count: usize, seed: &[u8; 32]) -> Vec<T> {
 
     bytes.truncate(expected_len_bytes);
 
-    unsafe {
-        let mut out: Vec<T> = std::mem::transmute(bytes);
-        out.set_len(count);
+    let mut out = std::mem::ManuallyDrop::new(bytes);
 
-        out
+    unsafe {
+        Vec::from_raw_parts(
+            out.as_mut_ptr() as *mut T,
+            count,
+            count
+        )
     }
 }
 
